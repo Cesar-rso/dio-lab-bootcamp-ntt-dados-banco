@@ -37,10 +37,10 @@ def saque(valor, limite_saque, extrato):
         print("Operacao realizada com sucesso!\n" + operacao)
 
 def exibe_extrato(saldo, extrato):
+    print("\n==========EXTRATO==========\n")
     if len(extrato) == 0:
         print("Não foram realizadas movimentacoes!")
     else:
-        print("\n==========EXTRATO==========\n")
         for operacao in extrato:
             print(operacao)
         
