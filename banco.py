@@ -40,10 +40,12 @@ def exibe_extrato(saldo, extrato):
     if len(extrato) == 0:
         print("Não foram realizadas movimentacoes!")
     else:
+        print("\n==========EXTRATO==========\n")
         for operacao in extrato:
             print(operacao)
         
     print(f"\nSaldo: R$ {saldo:.2f}")
+    print("\n===========================\n")
 
 
 while True:
