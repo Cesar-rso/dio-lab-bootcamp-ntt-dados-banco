@@ -1,5 +1,4 @@
 
-
 def criar_usuario(usuarios):
     cpf = input("Informe o CPF (somente numeros): ")
     if cpf in usuarios:
@@ -32,8 +31,9 @@ def deposito(valor, extrato, saldo, /):
         operacao = f"Deposito: \n   R$ {valor:.2f}"
         extrato.append(operacao)
         print("Operacao realizada com sucesso!\n" + operacao)
+        return valor
 
-def saque(*, valor, saque, numero_saques, limite_saque, extrato):
+def saque(*, valor, saldo, numero_saques, limite_saque, extrato):
     
     if valor > saldo:
         print("\nValor requerido maior que saldo atual! Não foi possível completar a operacao!\n")
@@ -45,6 +45,7 @@ def saque(*, valor, saque, numero_saques, limite_saque, extrato):
         operacao = f"Saque: \n      R$ {valor:.2f}"
         extrato.append(operacao)
         print("Operacao realizada com sucesso!\n" + operacao)
+        return valor
 
 def exibe_extrato(saldo, /, *, extrato):
     print("\n==========EXTRATO==========\n")
@@ -84,14 +85,14 @@ def main():
     
         if opcao == "d":
             valor = float(input("Informe o valor para deposito: R$ "))
-            deposito(valor, extrato, saldo)
+            saldo += deposito(valor, extrato, saldo)
     
         elif opcao == "s":
             if numero_saques >= LIMITE_SAQUES:
     	        print("Limite de saques diario atingido! Não foi possível completar a operacao!")
             else:
                 valor = float(input("Informe o valor para saque: R$ "))
-                saque(valor=valor, saque=saque, numero_saques=numero_saques, limite_saque=limite, extrato=extrato)
+                saldo -= saque(valor=valor, saldo=saldo, numero_saques=numero_saques, limite_saque=limite, extrato=extrato)
     
         elif opcao == "e":
             exibe_extrato(saldo, extrato=extrato)
